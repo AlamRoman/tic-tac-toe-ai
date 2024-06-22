@@ -37,7 +37,10 @@ public class GameBoard {
 	}
 	
 	public void computerMove() {
+		
 		Move move = minimax.bestMove(board);
+		
+		System.out.println(move);
 		
 		if (move!=null) {
 			setCell("O", move.getRow(), move.getCol());
