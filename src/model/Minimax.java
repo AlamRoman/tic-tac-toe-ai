@@ -4,7 +4,13 @@ public class Minimax {
 	
 	public Move bestMove(String[][] board) {
 		
-		String[][] b = board.clone();
+		String[][] b = new String[3][3];
+		
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 3; j++) {
+				b[i][j] = board[i][j];
+			}
+		}
 		
 		int bestScore = Integer.MAX_VALUE;
 		Move bestMove = null;
@@ -18,6 +24,7 @@ public class Minimax {
 					
 					if (score < bestScore) {
 						bestScore = score;
+						
 						bestMove = new Move(i, j);
 					}
 					
@@ -33,7 +40,19 @@ public class Minimax {
 		Integer winner = wincheck(b);
 		
 		if (winner != null) {
-			return winner;
+			
+			if (winner == 1) {
+				//maximizer win
+				return 10 - depth;
+			}else if(winner == -1) {
+				//minimizer win
+				return -10 + depth;
+			}else {
+				//draw
+				return 0;
+			}
+			
+			
 		}
 		
 		if (isMaximizing) {
@@ -53,7 +72,7 @@ public class Minimax {
 					}
 				}
 			}
-
+			
 			return bestScore;
 			
 		}else {
@@ -73,7 +92,6 @@ public class Minimax {
 				}
 			}
 			
-
 			return bestScore;
 		}
 	}
