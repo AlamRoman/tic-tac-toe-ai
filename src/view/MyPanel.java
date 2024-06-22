@@ -5,6 +5,9 @@ import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
+
+import control.Controller;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionListener;
@@ -34,50 +37,59 @@ public class MyPanel extends JPanel {
 		JButton btn1 = new JButton("X");
 		btn1.setFont(new Font("Tahoma", Font.BOLD, 80));
 		panel.add(btn1);
+		btn1.setActionCommand("btn1");
 		buttons.add(btn1);
 		
 		JButton btn2 = new JButton("");
 		btn2.setFont(new Font("Tahoma", Font.BOLD, 80));
 		panel.add(btn2);
+		btn2.setActionCommand("btn2");
 		buttons.add(btn2);
 		
 		JButton btn3 = new JButton("");
 		btn3.setFont(new Font("Tahoma", Font.BOLD, 80));
 		panel.add(btn3);
+		btn3.setActionCommand("btn3");
 		buttons.add(btn3);
 		
 		JButton btn4 = new JButton("");
 		btn4.setFont(new Font("Tahoma", Font.BOLD, 80));
 		panel.add(btn4);
+		btn4.setActionCommand("btn4");
 		buttons.add(btn4);
 		
 		JButton btn5 = new JButton("");
 		btn5.setFont(new Font("Tahoma", Font.BOLD, 80));
 		panel.add(btn5);
+		btn5.setActionCommand("btn5");
 		buttons.add(btn5);
 		
 		JButton btn6 = new JButton("");
 		btn6.setFont(new Font("Tahoma", Font.BOLD, 80));
 		panel.add(btn6);
+		btn6.setActionCommand("btn6");
 		buttons.add(btn6);
 		
 		JButton btn7 = new JButton("");
 		btn7.setFont(new Font("Tahoma", Font.BOLD, 80));
 		panel.add(btn7);
+		btn7.setActionCommand("btn7");
 		buttons.add(btn7);
 		
 		JButton btn8 = new JButton("");
 		btn8.setFont(new Font("Tahoma", Font.BOLD, 80));
 		panel.add(btn8);
+		btn8.setActionCommand("btn8");
 		buttons.add(btn8);
 		
 		JButton btn9 = new JButton("");
 		btn9.setFont(new Font("Tahoma", Font.BOLD, 80));
 		panel.add(btn9);
+		btn9.setActionCommand("btn9");
 		buttons.add(btn9);
 		
 		for (int i = 0; i < buttons.size(); i++) {
-			buttons.get(i).setActionCommand(buttons.get(i).getName());
+			buttons.get(i).setFocusable(false);
 		}
 		
 		//score panel
@@ -119,11 +131,26 @@ public class MyPanel extends JPanel {
 		lblNewLabel_3.setBounds(116, 81, 65, 23);
 		panel_1.add(lblNewLabel_3);
 		
+		//play again button
 		JButton btnNewButton = new JButton("Play again");
 		btnNewButton.setBounds(569, 332, 79, 19);
 		add(btnNewButton);
 
 	}
 	
+	public void addListenerToButtons(Controller controller) {
+		for (int i = 0; i < buttons.size(); i++) {
+			buttons.get(i).addActionListener(controller);
+		}
+	}
 	
+	public ArrayList<String> getButtonsActionCommand(){
+		ArrayList<String> list = new ArrayList<>();
+		
+		for (int i = 0; i < buttons.size(); i++) {
+			list.add(buttons.get(i).getActionCommand());
+		}
+		
+		return list;
+	}
 }
