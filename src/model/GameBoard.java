@@ -1,11 +1,14 @@
 package model;
 
+import java.util.Random;
+
 public class GameBoard {
 
 	private String[][] board;
 	private boolean computersTurnFirst;
 	private boolean isGameFinished;
 	private Minimax minimax;
+	private int move_count;
 	
 	public GameBoard() {
 		board = new String[3][3];
@@ -20,6 +23,7 @@ public class GameBoard {
 		
 		computersTurnFirst = false;
 		isGameFinished = false;
+		move_count = 0;
 	}
 	
 	public String getCell(int row, int col) {
@@ -32,18 +36,34 @@ public class GameBoard {
 		}
 	}
 	
-	public void playerMove(int row, int col) {
-		setCell("X", row, col);
+	public boolean playerMove(int row, int col) {
+		
+		if (board[row][col].equals("")) {
+			setCell("X", row, col);
+			move_count++;
+			return true;
+		}
+		
+		return false;
 	}
 	
 	public void computerMove() {
 		
-		Move move = minimax.bestMove(board);
+		Move move;
+		
+		if(move_count == 0) {
+			Random random = new Random();
+			
+			move = new Move(random.nextInt(0, 3), random.nextInt(0, 3));
+		}else {
+			move = minimax.bestMove(board);
+		}
 		
 		System.out.println(move);
 		
 		if (move!=null) {
 			setCell("O", move.getRow(), move.getCol());
+			move_count++;
 		}
 	}
 	
@@ -135,6 +155,12 @@ public class GameBoard {
 		this.computersTurnFirst = computersTurnFirst;
 	}
 
-	
+	public int getMove_count() {
+		return move_count;
+	}
+
+	public void setMove_count(int move_count) {
+		this.move_count = move_count;
+	}
 
 }

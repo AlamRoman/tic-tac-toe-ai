@@ -2,7 +2,6 @@ package control;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import model.GameBoard;
 import view.MyPanel;
@@ -57,7 +56,11 @@ public class Controller implements ActionListener{
 		
 		Integer winner;
 			
-		gameBoard.playerMove(r, c);
+		boolean validMove = gameBoard.playerMove(r, c);
+		
+		if (!validMove) {
+			return;
+		}
 		
 		winner = gameBoard.wincheck();
 		
@@ -82,6 +85,7 @@ public class Controller implements ActionListener{
 	private void newGame() {
 		gameBoard.clearBoard();
 		gameBoard.setGameFinished(false);
+		gameBoard.setMove_count(0);
 		panel.enableButtons();
 		
 		gameBoard.setComputersTurnFirst(!gameBoard.isComputersTurnFirst());
