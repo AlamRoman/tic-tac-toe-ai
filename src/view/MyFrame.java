@@ -16,7 +16,7 @@ public class MyFrame extends JFrame {
 	 */
 	public MyFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 842, 526);
+		setBounds(100, 100, 780, 526);
 		setLocationRelativeTo(null);
 		setTitle("Tic Tac Toe");
 		contentPane = new MyPanel();

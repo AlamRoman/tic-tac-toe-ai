@@ -32,25 +32,32 @@ public class Controller implements ActionListener{
 		*/
 		
 		if (e.getActionCommand().equalsIgnoreCase("btn1")) {
-			gameBoard.playMove(0, 0);
+			gameBoard.pleyerMove(0, 0);
 		}else if (e.getActionCommand().equalsIgnoreCase("btn2")) {
-			gameBoard.playMove(0, 1);
+			gameBoard.pleyerMove(0, 1);
 		}else if (e.getActionCommand().equalsIgnoreCase("btn3")) {
-			gameBoard.playMove(0, 2);
+			gameBoard.pleyerMove(0, 2);
 		}else if (e.getActionCommand().equalsIgnoreCase("btn4")) {
-			gameBoard.playMove(1, 0);
+			gameBoard.pleyerMove(1, 0);
 		}else if (e.getActionCommand().equalsIgnoreCase("btn5")) {
-			gameBoard.playMove(1, 1);
+			gameBoard.pleyerMove(1, 1);
 		}else if (e.getActionCommand().equalsIgnoreCase("btn6")) {
-			gameBoard.playMove(1, 2);
+			gameBoard.pleyerMove(1, 2);
 		}else if (e.getActionCommand().equalsIgnoreCase("btn7")) {
-			gameBoard.playMove(2, 0);
+			gameBoard.pleyerMove(2, 0);
 		}else if (e.getActionCommand().equalsIgnoreCase("btn8")) {
-			gameBoard.playMove(2, 1);
+			gameBoard.pleyerMove(2, 1);
 		}else if (e.getActionCommand().equalsIgnoreCase("btn9")) {
-			gameBoard.playMove(2, 2);
+			gameBoard.pleyerMove(2, 2);
 		}
 		
+		if (e.getActionCommand().equalsIgnoreCase("playAgain")) {
+			if (gameBoard.isGameFinished()) {
+				gameBoard.clearBoard();
+			}
+		}
+		
+		panel.updateButtons(gameBoard.getBoard());
 	}
 	
 	
