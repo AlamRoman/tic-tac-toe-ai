@@ -19,46 +19,75 @@ public class Controller implements ActionListener{
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		/*
-		ArrayList<String> btnsActionCommands = panel.getButtonsActionCommand();
+	public void actionPerformed(ActionEvent e) {	
 		
-		for (int i = 0; i < btnsActionCommands.size(); i++) {
-			
-			if (e.getActionCommand().equalsIgnoreCase(btnsActionCommands.get(i))) {
-				
+		
+		if (e.getActionCommand().contains("btn")) {
+			if (e.getActionCommand().equalsIgnoreCase("btn1")) {
+				playerMove(0, 0);
+			}else if (e.getActionCommand().equalsIgnoreCase("btn2")) {
+				playerMove(0, 1);
+			}else if (e.getActionCommand().equalsIgnoreCase("btn3")) {
+				playerMove(0, 2);
+			}else if (e.getActionCommand().equalsIgnoreCase("btn4")) {
+				playerMove(1, 0);
+			}else if (e.getActionCommand().equalsIgnoreCase("btn5")) {
+				playerMove(1, 1);
+			}else if (e.getActionCommand().equalsIgnoreCase("btn6")) {
+				playerMove(1, 2);
+			}else if (e.getActionCommand().equalsIgnoreCase("btn7")) {
+				playerMove(2, 0);
+			}else if (e.getActionCommand().equalsIgnoreCase("btn8")) {
+				playerMove(2, 1);
+			}else if (e.getActionCommand().equalsIgnoreCase("btn9")) {
+				playerMove(2, 2);
 			}
 		}
-		*/
-		
-		if (e.getActionCommand().equalsIgnoreCase("btn1")) {
-			gameBoard.pleyerMove(0, 0);
-		}else if (e.getActionCommand().equalsIgnoreCase("btn2")) {
-			gameBoard.pleyerMove(0, 1);
-		}else if (e.getActionCommand().equalsIgnoreCase("btn3")) {
-			gameBoard.pleyerMove(0, 2);
-		}else if (e.getActionCommand().equalsIgnoreCase("btn4")) {
-			gameBoard.pleyerMove(1, 0);
-		}else if (e.getActionCommand().equalsIgnoreCase("btn5")) {
-			gameBoard.pleyerMove(1, 1);
-		}else if (e.getActionCommand().equalsIgnoreCase("btn6")) {
-			gameBoard.pleyerMove(1, 2);
-		}else if (e.getActionCommand().equalsIgnoreCase("btn7")) {
-			gameBoard.pleyerMove(2, 0);
-		}else if (e.getActionCommand().equalsIgnoreCase("btn8")) {
-			gameBoard.pleyerMove(2, 1);
-		}else if (e.getActionCommand().equalsIgnoreCase("btn9")) {
-			gameBoard.pleyerMove(2, 2);
-		}
-		
+	
 		if (e.getActionCommand().equalsIgnoreCase("playAgain")) {
 			if (gameBoard.isGameFinished()) {
-				gameBoard.clearBoard();
+				newGame();
 			}
 		}
 		
 		panel.updateButtons(gameBoard.getBoard());
 	}
 	
+	private void playerMove(int r, int c) {
+		
+		Integer winner;
+			
+		gameBoard.playerMove(r, c);
+		
+		winner = gameBoard.wincheck();
+		
+		if (winner != null) {
+			gameBoard.setGameFinished(true);
+			panel.disableButtons();
+			panel.showWinMessage(winner);
+		}
+		
+		gameBoard.computerMove();
+		
+		winner = gameBoard.wincheck();
+		
+		if (winner != null) {
+			gameBoard.setGameFinished(true);
+			panel.disableButtons();
+			panel.showWinMessage(winner);
+		}
+			
+	}
 	
+	private void newGame() {
+		gameBoard.clearBoard();
+		gameBoard.setGameFinished(false);
+		panel.enableButtons();
+		
+		gameBoard.setComputersTurnFirst(!gameBoard.isComputersTurnFirst());
+		
+		if (gameBoard.isComputersTurnFirst()) {
+			gameBoard.computerMove();
+		}
+	}
 }

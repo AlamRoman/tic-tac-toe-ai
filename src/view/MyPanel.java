@@ -2,6 +2,8 @@ package view;
 
 import javax.swing.JPanel;
 import java.awt.GridLayout;
+import java.util.ArrayList;
+
 import javax.swing.JButton;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
@@ -18,6 +20,7 @@ public class MyPanel extends JPanel {
 
 	private JButton[][] buttons;
 	private JButton btnPlayAgain;
+	private JLabel lblmsg;
 	
 	public MyPanel() {
 		setLayout(null);
@@ -134,6 +137,12 @@ public class MyPanel extends JPanel {
 		btnPlayAgain.setBounds(547, 361, 123, 19);
 		btnPlayAgain.setActionCommand("playAgain");
 		add(btnPlayAgain);
+		
+		lblmsg = new JLabel("");
+		lblmsg.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblmsg.setHorizontalAlignment(SwingConstants.CENTER);
+		lblmsg.setBounds(507, 49, 200, 40);
+		add(lblmsg);
 
 	}
 	
@@ -151,6 +160,44 @@ public class MyPanel extends JPanel {
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 3; j++) {
 				buttons[i][j].setText(board[i][j]+"");
+			}
+		}
+	}
+	
+	public ArrayList<String> getButtonsActionCommand(){
+		ArrayList<String> list = new ArrayList<>();
+		
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 3; j++) {
+				list.add(buttons[i][j].getActionCommand());
+			}
+		}
+		
+		return list;
+	}
+	
+	public void showWinMessage(int winner) {
+		if (winner == 1) {
+			lblmsg.setText("You won");
+		}else if(winner == -1){
+			lblmsg.setText("Computer won");
+		}else if(winner == 0){
+			lblmsg.setText("The game is draw");
+		}
+	}
+	
+	public void disableButtons() {
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 3; j++) {
+				buttons[i][j].setEnabled(false);
+			}
+		}
+	}
+	
+	public void enableButtons() {
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 3; j++) {
+				buttons[i][j].setEnabled(true);
 			}
 		}
 	}
