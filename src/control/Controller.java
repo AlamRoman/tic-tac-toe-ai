@@ -4,15 +4,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import model.GameBoard;
+import model.Score;
 import view.MyPanel;
 
 public class Controller implements ActionListener{
 	private MyPanel panel;
 	private GameBoard gameBoard;
+	private Score score;
 	
-	public Controller(MyPanel panel, GameBoard gameBoard) {
+	public Controller(MyPanel panel, GameBoard gameBoard, Score score) {
 		this.panel = panel;
 		this.gameBoard = gameBoard;
+		this.score = score;
 		
 		panel.addListenerToButtons(this);
 	}
@@ -68,6 +71,10 @@ public class Controller implements ActionListener{
 			gameBoard.setGameFinished(true);
 			panel.disableButtons();
 			panel.showWinMessage(winner);
+			
+			updateScore(winner);
+			
+			return;
 		}
 		
 		gameBoard.computerMove();
@@ -78,6 +85,8 @@ public class Controller implements ActionListener{
 			gameBoard.setGameFinished(true);
 			panel.disableButtons();
 			panel.showWinMessage(winner);
+			
+			updateScore(winner);
 		}
 			
 	}
@@ -86,12 +95,27 @@ public class Controller implements ActionListener{
 		gameBoard.clearBoard();
 		gameBoard.setGameFinished(false);
 		gameBoard.setMove_count(0);
+		panel.clearWinMessage();
 		panel.enableButtons();
 		
 		gameBoard.setComputersTurnFirst(!gameBoard.isComputersTurnFirst());
 		
 		if (gameBoard.isComputersTurnFirst()) {
 			gameBoard.computerMove();
+		}
+	}
+	
+	private void updateScore(int winner) {
+		
+		if (winner == 1) {
+			score.incrementScoreX();
+			panel.setScoreO(score.getScoreX());
+		}else if (winner == -1) {
+			score.incrementScoreO();
+			panel.setScoreO(score.getScoreO());
+		}else {
+			score.incrementDrawCount();
+			panel.setDrawCount(score.getDrawCount());
 		}
 	}
 }

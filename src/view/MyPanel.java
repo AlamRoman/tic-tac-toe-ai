@@ -2,6 +2,7 @@ package view;
 
 import javax.swing.JPanel;
 import java.awt.GridLayout;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -11,6 +12,8 @@ import javax.swing.SwingConstants;
 import control.Controller;
 
 import javax.swing.JLabel;
+
+import java.awt.Color;
 import java.awt.Font;
 
 
@@ -21,6 +24,9 @@ public class MyPanel extends JPanel {
 	private JButton[][] buttons;
 	private JButton btnPlayAgain;
 	private JLabel lblmsg;
+	private JLabel lblScoreX;
+	private JLabel lblScoreO;
+	private JLabel lblDrawCount;
 	
 	public MyPanel() {
 		setLayout(null);
@@ -90,6 +96,7 @@ public class MyPanel extends JPanel {
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 3; j++) {
 				buttons[i][j].setFocusable(false);
+				buttons[i][j].setBackground(Color.WHITE);
 			}
 		}
 		
@@ -101,7 +108,7 @@ public class MyPanel extends JPanel {
 		
 		JSeparator separator = new JSeparator();
 		separator.setOrientation(SwingConstants.VERTICAL);
-		separator.setBounds(100, 0, 19, 150);
+		separator.setBounds(100, 0, 19, 125);
 		panel_1.add(separator);
 		
 		JSeparator separator_1 = new JSeparator();
@@ -120,26 +127,41 @@ public class MyPanel extends JPanel {
 		lblO.setBounds(116, 9, 65, 23);
 		panel_1.add(lblO);
 		
-		JLabel lblNewLabel_2 = new JLabel("00");
-		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblNewLabel_2.setBounds(19, 81, 65, 23);
-		panel_1.add(lblNewLabel_2);
+		lblScoreX = new JLabel("00");
+		lblScoreX.setHorizontalAlignment(SwingConstants.CENTER);
+		lblScoreX.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblScoreX.setBounds(0, 61, 98, 23);
+		panel_1.add(lblScoreX);
 		
-		JLabel lblNewLabel_3 = new JLabel("00");
-		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblNewLabel_3.setBounds(116, 81, 65, 23);
-		panel_1.add(lblNewLabel_3);
+		lblScoreO = new JLabel("00");
+		lblScoreO.setHorizontalAlignment(SwingConstants.CENTER);
+		lblScoreO.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblScoreO.setBounds(100, 61, 100, 23);
+		panel_1.add(lblScoreO);
+		
+		JSeparator separator_1_1 = new JSeparator();
+		separator_1_1.setBounds(0, 125, 200, 13);
+		panel_1.add(separator_1_1);
+		
+		lblDrawCount = new JLabel("Draw : 00");
+		lblDrawCount.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDrawCount.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblDrawCount.setBounds(0, 125, 200, 25);
+		panel_1.add(lblDrawCount);
+		
+		JSeparator separator_1_2 = new JSeparator();
+		separator_1_2.setBounds(0, 1, 200, 13);
+		panel_1.add(separator_1_2);
 		
 		//play again button
 		btnPlayAgain = new JButton("Play again");
-		btnPlayAgain.setBounds(547, 361, 123, 19);
+		btnPlayAgain.setBounds(547, 361, 123, 40);
 		btnPlayAgain.setActionCommand("playAgain");
+		btnPlayAgain.setFocusable(false);
 		add(btnPlayAgain);
 		
 		lblmsg = new JLabel("");
-		lblmsg.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblmsg.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblmsg.setHorizontalAlignment(SwingConstants.CENTER);
 		lblmsg.setBounds(507, 49, 200, 40);
 		add(lblmsg);
@@ -186,6 +208,10 @@ public class MyPanel extends JPanel {
 		}
 	}
 	
+	public void clearWinMessage() {
+		lblmsg.setText("");
+	}
+	
 	public void disableButtons() {
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 3; j++) {
@@ -200,5 +226,20 @@ public class MyPanel extends JPanel {
 				buttons[i][j].setEnabled(true);
 			}
 		}
+	}
+	
+	public void setScoreX(int score) {
+		DecimalFormat formatter = new DecimalFormat("00");
+		lblScoreX.setText(formatter.format(score)+"");
+	}
+	
+	public void setScoreO(int score) {
+		DecimalFormat formatter = new DecimalFormat("00");
+		lblScoreO.setText(formatter.format(score)+"");
+	}
+	
+	public void setDrawCount(int count) {
+		DecimalFormat formatter = new DecimalFormat("00");
+		lblDrawCount.setText("Draw : " + formatter.format(count));
 	}
 }
