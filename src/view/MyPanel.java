@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
@@ -35,7 +36,7 @@ public class MyPanel extends JPanel {
 		JPanel panel = new JPanel();
 		panel.setBounds(26, 26, 430, 430);
 		add(panel);
-		panel.setLayout(new GridLayout(3,3));
+		panel.setLayout(new GridLayout(3,3));	
 		
 		buttons = new JButton[3][3];
 		
@@ -102,9 +103,12 @@ public class MyPanel extends JPanel {
 		
 		//score panel
 		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(255, 255, 255));
 		panel_1.setBounds(507, 151, 200, 150);
 		add(panel_1);
 		panel_1.setLayout(null);
+		
+		panel_1.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
 		
 		JSeparator separator = new JSeparator();
 		separator.setOrientation(SwingConstants.VERTICAL);
@@ -149,21 +153,20 @@ public class MyPanel extends JPanel {
 		lblDrawCount.setBounds(0, 125, 200, 25);
 		panel_1.add(lblDrawCount);
 		
-		JSeparator separator_1_2 = new JSeparator();
-		separator_1_2.setBounds(0, 1, 200, 13);
-		panel_1.add(separator_1_2);
-		
 		//play again button
 		btnPlayAgain = new JButton("Play again");
-		btnPlayAgain.setBounds(547, 361, 123, 40);
+		btnPlayAgain.setBounds(547, 354, 123, 40);
 		btnPlayAgain.setActionCommand("playAgain");
 		btnPlayAgain.setFocusable(false);
 		add(btnPlayAgain);
 		
 		lblmsg = new JLabel("");
-		lblmsg.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblmsg.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblmsg.setHorizontalAlignment(SwingConstants.CENTER);
-		lblmsg.setBounds(507, 49, 200, 40);
+		lblmsg.setBounds(507, 60, 200, 40);
+		lblmsg.setOpaque(true);
+		lblmsg.setForeground(new Color(253,253,253));
+		lblmsg.setVisible(false);
 		add(lblmsg);
 
 	}
@@ -199,17 +202,23 @@ public class MyPanel extends JPanel {
 	}
 	
 	public void showWinMessage(int winner) {
+		lblmsg.setVisible(true);
+		
 		if (winner == 1) {
+			lblmsg.setBackground(new Color(90, 252, 61));
 			lblmsg.setText("You won");
 		}else if(winner == -1){
+			lblmsg.setBackground(new Color(252, 61, 80));
 			lblmsg.setText("Computer won");
 		}else if(winner == 0){
-			lblmsg.setText("The game is draw");
+			lblmsg.setBackground(new Color(61, 195, 252));
+			lblmsg.setText("The game is a draw");
 		}
 	}
 	
 	public void clearWinMessage() {
 		lblmsg.setText("");
+		lblmsg.setVisible(false);
 	}
 	
 	public void disableButtons() {

@@ -109,7 +109,7 @@ public class Controller implements ActionListener{
 		
 		if (winner == 1) {
 			score.incrementScoreX();
-			panel.setScoreO(score.getScoreX());
+			panel.setScoreX(score.getScoreX());
 		}else if (winner == -1) {
 			score.incrementScoreO();
 			panel.setScoreO(score.getScoreO());

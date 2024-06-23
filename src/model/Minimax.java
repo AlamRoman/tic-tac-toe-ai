@@ -55,6 +55,14 @@ public class Minimax {
 			
 		}
 		
+		/*
+		 * for an easy game
+		 * 
+		if (depth >= 1) {
+			return 0;
+		}
+		*/
+		
 		if (isMaximizing) {
 			
 			int bestScore = Integer.MIN_VALUE;
